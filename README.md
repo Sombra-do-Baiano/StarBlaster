@@ -1,11 +1,10 @@
 # Star Blaster
 
 ## Integrantes do grupo
-
-- Nome 1: Joaquim de Assis Santana
-- Nome 2: Gabriel Lucas Telles Vilaça
-- Nome 3: João Vitor Vasconcelos de Souza
-- Nome 4: Eduardo Gomes Andrade
+- Eduardo Gomes Andrade 
+- Gabriel Lucas Teles Vilaça
+- João Vítor Vasconcelos de Souza
+- Joaquim de Assis Santana 
 
 ## Estrutura do projeto
 
