@@ -2,10 +2,10 @@
 
 ## Integrantes do grupo
 
-- Nome 1: Joaquim de Assis Santana
-- Nome 2: Gabriel Lucas Telles Vilaça
-- Nome 3: João Vitor Vasconcelos de Souza
-- Nome 4: Eduardo Gomes Andrade
+- Joaquim de Assis Santana
+- Gabriel Lucas Telles Vilaça
+- João Vitor Vasconcelos de Souza
+- Eduardo Gomes Andrade
 
 ## Estrutura do projeto
 
