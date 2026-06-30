@@ -7,7 +7,7 @@ Todos os valores numéricos vêm de config.py.
 import pygame
 import random
 import math
-from config import (
+from src.config import (
     W, H,
     CYAN, WHITE, ORANGE, PURPLE, BLACK,
     # player
@@ -33,7 +33,7 @@ from config import (
     # geral
     MAX_LIVES, HEART_SIZE, HEART_SPACING, fonts,
 )
-from draw_utils import draw_ship, draw_heart
+from src.draw_utils import draw_ship, draw_heart
 
 
 # ── Particle ──────────────────────────────────────────────────────────────────

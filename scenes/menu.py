@@ -12,9 +12,9 @@ Retorna para o SceneManager via self.next_scene.
 
 import pygame
 import math
-from config import W, H, CYAN, YELLOW, WHITE, GRAY, DKBLUE, GREEN, ORANGE, RED, fonts
-from background import StarField
-from scores import load_scores
+from src.config import W, H, CYAN, YELLOW, WHITE, GRAY, DKBLUE, GREEN, ORANGE, RED, fonts
+from src.background import StarField
+from src.scores import load_scores
 
 
 # ── Botão simples ─────────────────────────────────────────────────────────────
@@ -91,12 +91,10 @@ class MenuScene:
 
         # ── Título ──────────────────────────────────────────────────────────
         bob = math.sin(self.t * 0.05) * 6
-        title = fonts["big"].render("STAR  BLASTER", True, CYAN)
-        star  = fonts["big"].render("★", True, YELLOW)
-        tx = W // 2 - (title.get_width() + star.get_width() + 10) // 2
+        title = fonts["big"].render("--- STAR  BLASTER ---", True, CYAN)
+        tx = W // 2 - (title.get_width() + 10) // 2
         ty = int(80 + bob)
         surf.blit(title, (tx, ty))
-        surf.blit(star,  (tx + title.get_width() + 10, ty))
 
         sub = fonts["sm"].render("WASD / Setas = mover    ESPAÇO = atirar", True, GRAY)
         surf.blit(sub, (W // 2 - sub.get_width() // 2, 148))
@@ -105,7 +103,7 @@ class MenuScene:
         pygame.draw.line(surf, GRAY, (W // 4, 175), (3 * W // 4, 175), 1)
 
         # ── TOP 5 ────────────────────────────────────────────────────────────
-        top_lbl = fonts["med"].render("🏆  TOP  5", True, YELLOW)
+        top_lbl = fonts["med"].render("TOP  5", True, YELLOW)
         surf.blit(top_lbl, (W // 2 - top_lbl.get_width() // 2, 188))
 
         if self.scores:
@@ -113,7 +111,7 @@ class MenuScene:
             for i, entry in enumerate(self.scores[:5]):
                 color = medal_colors[i]
                 rank  = fonts["sm"].render(f"#{i+1}", True, color)
-                name  = fonts["sm"].render(f"{entry['name'][:12]:<12}", True, WHITE)
+                name  = fonts["sm"].render(f"{entry['name'][:15]:<15}", True, WHITE)
                 sc    = fonts["sm"].render(f"{entry['score']:>8}", True, GREEN)
                 wave  = fonts["sm"].render(f"wave {entry['wave']}", True, GRAY)
 

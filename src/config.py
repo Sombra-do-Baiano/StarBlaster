@@ -28,9 +28,9 @@ import os
 # 1. RESOLUÇÃO E FPS
 # ═════════════════════════════════════════════════════════════════════════════
 
-W, H       = 900, 600   # largura x altura da janela em pixels
+W, H       = 1920, 1080   # largura x altura da janela em pixels
 FPS        = 60          # frames por segundo (afeta velocidade geral do jogo)
-FULLSCREEN = False       # True = tela cheia
+FULLSCREEN = True       # True = tela cheia
 
 # ═════════════════════════════════════════════════════════════════════════════
 # 2. CORES
@@ -57,8 +57,8 @@ DKGREEN = (0,   20,   0)
 #      para o tamanho definido nas seções de cada entidade.
 # ═════════════════════════════════════════════════════════════════════════════
 
-BASE_DIR   = os.path.dirname(os.path.abspath(__file__))
-ASSETS_DIR = os.path.join(BASE_DIR, "assets")
+BASE_DIR   = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ASSETS_DIR = os.path.join(BASE_DIR, r"assets")
 
 def asset(path: str | None) -> str | None:
     """Retorna caminho absoluto dentro de assets/, ou None se path for None."""
@@ -102,15 +102,16 @@ POWERUP_SPRITES: dict[str, str | None] = {
 
 # ── Sons ─────────────────────────────────────────────────────────────────────
 # None = sem som para aquele evento.
-SOUND_SHOOT:      str | None = asset(None)   # ex.: asset("sfx_shoot.wav")
-SOUND_EXPLOSION:  str | None = asset(None)
+# NÃO IMPLEMENTADO
+SOUND_SHOOT:      str | None = asset(r"sons\music_menu.mp3")
+SOUND_EXPLOSION:  str | None = asset(r"sons\enemy_death.ogg")
 SOUND_POWERUP:    str | None = asset(None)
-SOUND_BOSS_ENTER: str | None = asset(None)
-SOUND_MUSIC_MENU: str | None = asset(None)   # música de fundo do menu
-SOUND_MUSIC_GAME: str | None = asset(None)   # música de fundo do jogo
+SOUND_BOSS_ENTER: str | None = asset(r"sons\boss_sound.ogg")
+SOUND_MUSIC_MENU: str | None = asset(r"sons\music_menu.mp3")   # música de fundo do menu
+SOUND_MUSIC_GAME: str | None = asset(r"sons\music_game.mp3")   # música de fundo do jogo
 
 # ── Placar ───────────────────────────────────────────────────────────────────
-SCORES_FILE = os.path.join(BASE_DIR, "scores.json")
+SCORES_FILE = os.path.join(BASE_DIR, r"data\scores.json")
 
 # ═════════════════════════════════════════════════════════════════════════════
 # 4. PLACAR
@@ -122,7 +123,7 @@ MAX_SCORES = 5   # quantos recordes são guardados no arquivo
 # 5. JOGO — REGRAS GERAIS
 # ═════════════════════════════════════════════════════════════════════════════
 
-MAX_LIVES          = 3   # vidas iniciais do jogador (corações)
+MAX_LIVES          = 5   # vidas iniciais do jogador (corações)
 BOSS_WAVE_INTERVAL = 3   # a cada N waves aparece um boss
 MAX_WAVES          = 9   # número de waves até a vitória
 
@@ -148,7 +149,7 @@ POWERUP_DROP_CHANCE = 0.25
 
 PLAYER_W          = 70     # largura do sprite/hitbox do player em pixels
 PLAYER_H          = 44     # altura
-PLAYER_SPEED      =  5     # pixels por frame de movimento
+PLAYER_SPEED      = 10     # pixels por frame de movimento
 PLAYER_START_X    = 80     # posição X inicial
 PLAYER_INVINCIBLE_FRAMES = 90  # frames de invencibilidade após levar dano
 
@@ -158,9 +159,9 @@ PLAYER_MAX_X_FRACTION = 0.5   # 0.5 = metade da tela
 # ── Corações (vidas) ─────────────────────────────────────────────────────────
 # Sprite usado para os corações de vida no HUD.
 # None = coração desenhado via polígono matemático.
-HEART_SPRITE_FULL:  str | None = asset(None)   # coração cheio  (vida disponível)
+HEART_SPRITE_FULL:  str | None = asset(r"imagens\heart_full.png")   # coração cheio  (vida disponível)
 # ex.: asset("hud_heart_full.png")
-HEART_SPRITE_EMPTY: str | None = asset(None)   # coração vazio  (vida perdida)
+HEART_SPRITE_EMPTY: str | None = asset(r"imagens\heart_empty.png")   # coração vazio  (vida perdida)
 # ex.: asset("hud_heart_empty.png")
 
 HEART_SIZE    = 14   # tamanho em pixels (raio no modo procedural; lado no modo sprite)
@@ -232,8 +233,8 @@ FIGHTER_HP         = 1    # HP inicial
 FIGHTER_SPEED_MIN  = 2.5   # velocidade mínima horizontal (px/frame)
 FIGHTER_SPEED_MAX  = 4.5   # velocidade máxima horizontal
 FIGHTER_WAVE_AMP   = 40    # amplitude máxima do movimento senoidal vertical
-FIGHTER_SHOOT_CD_MIN = 90  # cooldown mínimo de tiro (frames)
-FIGHTER_SHOOT_CD_MAX = 180 # cooldown máximo de tiro
+FIGHTER_SHOOT_CD_MIN = 3*FPS  # cooldown mínimo de tiro (frames)
+FIGHTER_SHOOT_CD_MAX = 5*FPS # cooldown máximo de tiro
 FIGHTER_SCORE      = SCORE_KILL_FIGHTER
 
 # ═════════════════════════════════════════════════════════════════════════════

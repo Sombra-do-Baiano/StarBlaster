@@ -8,7 +8,7 @@ Se STAR_SPRITE estiver definida, usa o sprite no lugar do círculo.
 
 import pygame
 import random
-from config import (
+from src.config import (
     W, H,
     STAR_COUNT, STAR_SPEED_MIN, STAR_SPEED_MAX, STAR_SIZE_FACTOR,
     BACKGROUND_IMAGE, STAR_SPRITE,

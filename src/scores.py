@@ -11,7 +11,7 @@ Estrutura do arquivo:
 
 import json
 import os
-from config import SCORES_FILE, MAX_SCORES
+from src.config import SCORES_FILE, MAX_SCORES
 
 
 def load_scores() -> list[dict]:

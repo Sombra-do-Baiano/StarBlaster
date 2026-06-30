@@ -7,9 +7,9 @@ Após confirmar, salva o placar e vai para o menu.
 """
 
 import pygame
-from config import W, H, CYAN, YELLOW, WHITE, GRAY, DKBLUE, GREEN, RED, fonts
-from background import StarField
-from scores import load_scores, insert_score, save_scores
+from src.config import W, H, CYAN, YELLOW, WHITE, GRAY, DKBLUE, GREEN, RED, fonts
+from src.background import StarField
+from src.scores import load_scores, insert_score, save_scores
 
 MAX_NAME_LEN = 12
 

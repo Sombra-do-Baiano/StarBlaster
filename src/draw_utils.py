@@ -6,7 +6,7 @@ Nenhuma classe de jogo aqui — só formas.
 
 import pygame
 import math
-from config import RED, ORANGE, YELLOW, GREEN, WHITE, CYAN, PURPLE
+from src.config import RED, ORANGE, YELLOW, GREEN, WHITE, CYAN, PURPLE, HEART_SPRITE_FULL, HEART_SPRITE_EMPTY
 
 # cache de superfícies de sprite já carregadas (evita reabrir arquivo a cada frame)
 _heart_cache: dict[str, pygame.Surface | None] = {}
@@ -79,7 +79,6 @@ def draw_heart(surf: pygame.Surface, cx: int, cy: int, size: int, filled: bool):
     - Caso contrário, desenha via polígono matemático.
     filled = True → vida disponível;  False → vida perdida.
     """
-    from config import HEART_SPRITE_FULL, HEART_SPRITE_EMPTY
 
     sprite_path = HEART_SPRITE_FULL if filled else HEART_SPRITE_EMPTY
 

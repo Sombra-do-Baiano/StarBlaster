@@ -13,7 +13,7 @@ import pygame
 import random
 import math
 
-from config import (
+from src.config import (
     W, H,
     CYAN, YELLOW, WHITE, ORANGE, GREEN, RED, GRAY, DKBLUE, PURPLE,
     BOSS_WAVE_INTERVAL, MAX_WAVES, fonts,
@@ -23,10 +23,10 @@ from config import (
     ENEMIES_BASE, ENEMIES_PER_WAVE, POWERUP_DROP_CHANCE,
     HEART_SIZE,
 )
-from background import StarField
-from entities import Player, Bullet, PowerUp, Particle, explode, POWERUP_TYPES
-from enemies import EnemyFighter, EnemyUFO, Boss
-from scores import load_scores, qualifies
+from src.background import StarField
+from src.entities import Player, Bullet, PowerUp, Particle, explode, POWERUP_TYPES
+from src.enemies import EnemyFighter, EnemyUFO, Boss
+from src.scores import load_scores, qualifies
 
 
 class GameScene:

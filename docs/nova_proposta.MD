@@ -19,18 +19,18 @@ Você pilota uma nave espacial e deve sobreviver a ondas crescentes de inimigos 
 Sobreviver ao maior número de waves possível, eliminando inimigos e bosses para acumular a maior pontuação e entrar no ranking dos 5 melhores jogadores.
 
 ## 6. Regras principais
-- O jogador começa com 3 vidas representadas por corações no HUD
+- O jogador começa com 5 vidas representadas por corações no HUD
 - Inimigos surgem continuamente da direita da tela em spawn progressivo
 - Ao completar um ciclo de waves, um boss aparece antes de avançar para o próximo ciclo
 - Inimigos eliminados têm chance de dropar power-ups coletáveis
-- O jogador perde uma vida ao ser atingido por tiros inimigos ou colidir com uma nave inimiga
+- O jogador perde uma vida ao ser atingido por tiros inimigos ou duas ao colidir com uma nave inimiga
 - O jogo encerra quando todas as vidas são perdidas ou ao completar a wave 9
 
 ## 7. Condição de vitória
 Completar todas as 9 waves, incluindo os 3 bosses que aparecem nas waves 3, 6 e 9.
 
 ## 8. Condição de derrota ou encerramento
-O jogador perde quando todas as 3 vidas (corações) se esgotam. Caso a pontuação final entre no top 5 do ranking, o jogo solicita o nome do jogador antes de retornar ao menu.
+O jogador perde quando todas as 5 vidas (corações) se esgotam. Caso a pontuação final entre no top 5 do ranking, o jogo solicita o nome do jogador antes de retornar ao menu.
 
 ## 9. Elementos previstos no jogo
 - **Nave do jogador** com sistema de tiro e movimento em 4 direções

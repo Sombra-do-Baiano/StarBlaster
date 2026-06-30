@@ -7,7 +7,7 @@ Todos os parâmetros vêm de config.py.
 import pygame
 import random
 import math
-from config import (
+from src.config import (
     W, H,
     # fighter
     FIGHTER_W, FIGHTER_H, FIGHTER_HP,
@@ -33,8 +33,8 @@ from config import (
     BULLET_BOSS_STEP, BULLET_BOSS_DMG, BULLET_BOSS_COLOR,
     RED,
 )
-from entities import Bullet
-from draw_utils import draw_enemy_fighter, draw_enemy_ufo, draw_boss
+from src.entities import Bullet
+from src.draw_utils import draw_enemy_fighter, draw_enemy_ufo, draw_boss
 
 
 # ── Fighter ───────────────────────────────────────────────────────────────────

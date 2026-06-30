@@ -1,15 +1,11 @@
-# Nome do Jogo
-
-Projeto final da disciplina de Introdução a Algoritmos/Programação, desenvolvido com Python e Pygame.
-
-Este repositório é um template para os grupos da disciplina. A proposta é começar com uma base funcional e evoluir o jogo ao longo do semestre.
+# Star Blaster
 
 ## Integrantes do grupo
 
-- Nome do integrante 1
-- Nome do integrante 2
-- Nome do integrante 3
-- Nome do integrante 4
+- Nome 1: Joaquim de Assis Santana
+- Nome 2: Gabriel Lucas Telles Vilaça
+- Nome 3: João Vitor Vasconcelos de Souza
+- Nome 4: Eduardo Gomes Andrade
 
 ## Estrutura do projeto
 
@@ -17,47 +13,32 @@ Este repositório é um template para os grupos da disciplina. A proposta é com
 - `src/`: código-fonte principal do jogo (loop, regras, sprites e dados).
 - `assets/`: imagens, fontes e sons.
 - `data/`: arquivos persistentes (recorde/ranking).
-- `tests/`: testes unitários com `pytest`.
 - `docs/`: documentação do projeto, incluindo proposta inicial.
 
 ## Descrição do jogo
 
-Descreva brevemente a ideia principal do jogo.
-
-Exemplo:
-
-> O jogo consiste em controlar um personagem que deve coletar moedas e evitar obstáculos. O jogador ganha pontos ao coletar itens e perde vidas ao colidir com obstáculos. A partida termina quando o tempo acaba ou quando o jogador perde todas as vidas.
+Você pilota uma nave espacial e deve sobreviver a ondas crescentes de inimigos enquanto avança por waves cada vez mais difíceis. Colete power-ups para potencializar sua nave e enfrente bosses poderosos ao final de cada ciclo de waves.
 
 ## Objetivo do jogador
 
-Explique o que o jogador precisa fazer para vencer ou avançar no jogo.
-
-Exemplo:
-
-> O objetivo é coletar a maior quantidade possível de itens antes que o tempo acabe, evitando colisões com os obstáculos.
+Sobreviver ao maior número de waves possível, eliminando inimigos e bosses para acumular a maior pontuação e entrar no ranking dos 5 melhores jogadores.
 
 ## Regras do jogo
 
-Liste as principais regras do jogo.
-
-Exemplo:
-
-- O jogador se movimenta usando as setas do teclado.
-- Cada item coletado aumenta a pontuação.
-- Colidir com um obstáculo reduz a quantidade de vidas.
-- A partida termina quando o jogador perde todas as vidas ou quando o tempo acaba.
+- O jogador começa com 5 vidas representadas por corações no HUD
+- Inimigos surgem continuamente da direita da tela em spawn progressivo
+- Ao completar um ciclo de waves, um boss aparece antes de avançar para o próximo ciclo
+- Inimigos eliminados têm chance de dropar power-ups coletáveis
+- O jogador perde uma vida ao ser atingido por tiros inimigos ou duas ao colidir com uma nave inimiga
+- O jogo encerra quando todas as vidas são perdidas ou ao completar a wave 9
 
 ## Controles
-
-Informe as teclas ou comandos utilizados no jogo.
-
-Exemplo:
 
 - Seta para cima: mover para cima
 - Seta para baixo: mover para baixo
 - Seta para esquerda: mover para esquerda
 - Seta para direita: mover para direita
-- Espaço: realizar ação
+- Espaço: atira
 - ESC: sair do jogo
 
 ## Como executar o projeto
@@ -70,11 +51,12 @@ cd NOME_DA_PASTA
 pip install -r requirements.txt
 python main.py
 ```
-
-## Como executar os testes
+### 2. Opção 2 usar o .venv
+Com o terminal aberto na pasta do projeto rode:
 
 ```bash
-python -m pytest
+.\.venv\Scripts\Activate.ps1
+python main.py
 ```
 
 ## Checklist mínimo para entrega
@@ -82,10 +64,3 @@ python -m pytest
 - Preencher este README com nome final, descrição real, regras e controles do jogo.
 - Atualizar `docs/proposta.MD` com a proposta do grupo.
 - Garantir que o jogo executa com `python main.py`.
-- Garantir que os testes passam com `pytest`.
-
-## Observações para os alunos
-
-- Mantenham o código organizado em módulos pequenos e com responsabilidade clara.
-- Comentem partes importantes da lógica, principalmente regras do jogo.
-- Registrem decisões técnicas no README do grupo ao longo do desenvolvimento.

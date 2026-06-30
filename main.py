@@ -5,6 +5,7 @@ Entry point do STAR BLASTER.
 SceneManager:
   Mantém a cena ativa e troca quando cena.next_scene != None.
 
+(TODAS AS CENAS USADAS DEVEM ESTAR REGISTRADAS AQUI)
 Cenas registradas:
   "menu"       → MenuScene
   "game"       → GameScene
@@ -16,9 +17,9 @@ import pygame
 
 # ── Inicialização do pygame ANTES de importar módulos que usam fontes ─────────
 pygame.init()
-pygame.display.set_caption("STAR BLASTER  ★")
+pygame.display.set_caption("STAR BLASTER")
 
-from config import W, H, FPS, init_fonts
+from src.config import W, H, FPS, init_fonts
 
 screen = pygame.display.set_mode((W, H))
 clock  = pygame.time.Clock()
@@ -84,7 +85,7 @@ class SceneManager:
             pygame.display.flip()
 
 
-# ── Entry point ───────────────────────────────────────────────────────────────
+# ── Início ────────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
     SceneManager().run()
