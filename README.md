@@ -9,6 +9,7 @@
 ## Estrutura do projeto
 
 - `main.py`: ponto de entrada da aplicação.
+- `scenes/`: todas as cenas usadas durante o jogo.
 - `src/`: código-fonte principal do jogo (loop, regras, sprites e dados).
 - `assets/`: imagens, fontes e sons.
 - `data/`: arquivos persistentes (recorde/ranking).
