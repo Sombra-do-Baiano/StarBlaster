@@ -51,13 +51,7 @@ cd NOME_DA_PASTA
 pip install -r requirements.txt
 python main.py
 ```
-### 2. Opção 2 usar o .venv
-Com o terminal aberto na pasta do projeto rode:
 
-```bash
-.\.venv\Scripts\Activate.ps1
-python main.py
-```
 
 ## Checklist mínimo para entrega
 
