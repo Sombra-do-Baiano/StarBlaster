@@ -1,84 +1,131 @@
+"""
+scenes/menu.py
+Cena do Menu Principal.
+
+Exibe:
+  - Título animado
+  - Top 5 placares lidos do arquivo
+  - Botões: "Nova Partida" e "Sair"
+
+Retorna para o SceneManager via self.next_scene.
+"""
+
 import pygame
-import sys
-
-from Configurations import Configurations
-from Scenes.BaseScene import Scene
-from UI.Button import Button
-from UI.Text import Text
-from UI.Colors import BLACK, WHITE, DIM
+import math
+from src.config import W, H, CYAN, YELLOW, WHITE, GRAY, DKBLUE, GREEN, ORANGE, RED, fonts
+from src.background import StarField
+from src.scores import load_scores
 
 
-class MenuScene(Scene):
-    name = "menu"
+# ── Botão simples ─────────────────────────────────────────────────────────────
 
-    def __init__(self, manager):
-        super().__init__(manager)
+class Button:
+    def __init__(self, x, y, w, h, text: str, color, hover_color):
+        self.rect  = pygame.Rect(x, y, w, h)
+        self.text  = text
+        self.color = color
+        self.hover_color = hover_color
+        self._hovered = False
 
-        self.font_title = pygame.font.SysFont(None, 96)
-        self.font_sub = pygame.font.SysFont(None, 30)
+    def update(self, mouse_pos):
+        self._hovered = self.rect.collidepoint(mouse_pos)
 
-        center_w = Configurations.SCREEN_W // 2
-        center_y = Configurations.SCREEN_H // 2
+    def draw(self, surf: pygame.Surface):
+        color = self.hover_color if self._hovered else self.color
+        pygame.draw.rect(surf, color, self.rect, border_radius=10)
+        pygame.draw.rect(surf, WHITE, self.rect, 2, border_radius=10)
+        lbl = fonts["med"].render(self.text, True, WHITE)
+        surf.blit(lbl, (self.rect.centerx - lbl.get_width() // 2,
+                        self.rect.centery - lbl.get_height() // 2))
 
-        self.btn_new = Button("Novo Jogo", center_w, 50 + center_y, 36, 350, 75, WHITE, True)
-        self.btn_load = Button("Carregar Jogo", center_w, 150 + center_y, 36, 350, 75, WHITE, True)
-        self.btn_quit = Button("Sair", center_w, 250 + center_y, 36, 350, 75, WHITE, True)
+    def clicked(self, event: pygame.event.Event) -> bool:
+        return (event.type == pygame.MOUSEBUTTONDOWN
+                and event.button == 1
+                and self.rect.collidepoint(event.pos))
 
-        self.text_title = Text(
-            Configurations.TITLE,
-            Configurations.SCREEN_W // 2,
-            -110 + Configurations.SCREEN_H // 2,
-            WHITE,
-            36,
-            True
-        )
 
-        self.text_esc_to_quit = Text(
-            "Pressione Esc para sair",
-            Configurations.SCREEN_W // 2,
-            350 + Configurations.SCREEN_H // 2,
-            DIM,
-            36,
-            True
-        )
+# ── Cena ──────────────────────────────────────────────────────────────────────
 
-        self.scene = pygame.sprite.Group()
-        self.scene.add(
-            self.btn_new,
-            self.btn_load,
-            self.btn_quit,
-            self.text_title,
-            self.text_esc_to_quit
-        )
+class MenuScene:
+    def __init__(self):
+        self.next_scene: str | None = None
+        self.stars = StarField()
+        self.t = 0
 
-    def handle_event(self, event):
-        if self.btn_new.handle_event(event):
-            self.manager.switch_to("newgame")
+        btn_w, btn_h = 260, 52
+        cx = W // 2
 
-        if self.btn_load.handle_event(event):
-            self.manager.switch_to("maingame")
+        self.btn_play = Button(cx - btn_w // 2, 390, btn_w, btn_h,
+                               "Nova Partida", (30, 100, 180), (50, 150, 240))
+        self.btn_quit = Button(cx - btn_w // 2, 460, btn_w, btn_h,
+                               "Sair", (120, 30, 30), (200, 50, 50))
 
-        if self.btn_quit.handle_event(event):
-            pygame.quit()
-            sys.exit()
+        self.scores = load_scores()
 
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-            pygame.quit()
-            sys.exit()
+    def handle_event(self, event: pygame.event.Event):
+        if event.type == pygame.QUIT:
+            self.next_scene = "quit"
 
-    def update(self, events):
-        for event in events:
-            self.handle_event(event)
+        if self.btn_play.clicked(event):
+            self.next_scene = "game"
 
-    def draw(self, surface):
-        surface.fill(BLACK)
+        if self.btn_quit.clicked(event):
+            self.next_scene = "quit"
 
-        pygame.draw.line(
-            surface,
-            DIM,
-            (Configurations.SCREEN_W / 20, -35 + Configurations.SCREEN_H // 2),
-            (Configurations.SCREEN_W * 19 / 20, -35 + Configurations.SCREEN_H // 2),
-            1,
-        )
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RETURN:
+                self.next_scene = "game"
+            if event.key == pygame.K_ESCAPE:
+                self.next_scene = "quit"
 
-        self.scene.draw(surface)
+    def update(self):
+        self.t += 1
+        self.stars.update()
+        mouse = pygame.mouse.get_pos()
+        self.btn_play.update(mouse)
+        self.btn_quit.update(mouse)
+
+    def draw(self, surf: pygame.Surface):
+        surf.fill(DKBLUE)
+        self.stars.draw(surf)
+
+        # ── Título ──────────────────────────────────────────────────────────
+        bob = math.sin(self.t * 0.05) * 6
+        title = fonts["big"].render("STAR  BLASTER", True, CYAN)
+        star  = fonts["big"].render("★", True, YELLOW)
+        tx = W // 2 - (title.get_width() + star.get_width() + 10) // 2
+        ty = int(80 + bob)
+        surf.blit(title, (tx, ty))
+        surf.blit(star,  (tx + title.get_width() + 10, ty))
+
+        sub = fonts["sm"].render("WASD / Setas = mover    ESPAÇO = atirar", True, GRAY)
+        surf.blit(sub, (W // 2 - sub.get_width() // 2, 148))
+
+        # ── Linha divisória ──────────────────────────────────────────────────
+        pygame.draw.line(surf, GRAY, (W // 4, 175), (3 * W // 4, 175), 1)
+
+        # ── TOP 5 ────────────────────────────────────────────────────────────
+        top_lbl = fonts["med"].render("🏆  TOP  5", True, YELLOW)
+        surf.blit(top_lbl, (W // 2 - top_lbl.get_width() // 2, 188))
+
+        if self.scores:
+            medal_colors = [YELLOW, GRAY, ORANGE, WHITE, WHITE]
+            for i, entry in enumerate(self.scores[:5]):
+                color = medal_colors[i]
+                rank  = fonts["sm"].render(f"#{i+1}", True, color)
+                name  = fonts["sm"].render(f"{entry['name'][:12]:<12}", True, WHITE)
+                sc    = fonts["sm"].render(f"{entry['score']:>8}", True, GREEN)
+                wave  = fonts["sm"].render(f"wave {entry['wave']}", True, GRAY)
+
+                row_y = 228 + i * 28
+                surf.blit(rank, (W // 2 - 220, row_y))
+                surf.blit(name, (W // 2 - 175, row_y))
+                surf.blit(sc,   (W // 2 + 20,  row_y))
+                surf.blit(wave, (W // 2 + 130, row_y))
+        else:
+            empty = fonts["sm"].render("Nenhum placar ainda — seja o primeiro!", True, GRAY)
+            surf.blit(empty, (W // 2 - empty.get_width() // 2, 240))
+
+        # ── Botões ────────────────────────────────────────────────────────────
+        self.btn_play.draw(surf)
+        self.btn_quit.draw(surf)
